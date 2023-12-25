@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 public class ZabbixAPI {
 
     final static Logger logger = LoggerFactory.getLogger(MainController.class);
+    public static String[][] table_inc;
     public static String jsonToken = "{" +
             "\"jsonrpc\":\"2.0\"," +
             "\"method\":\"user.login\"," +
@@ -365,9 +366,18 @@ public class ZabbixAPI {
                     .replace("},{","}!{")
                     .split("!");
 
+            table_inc = new String[jsonmes.length][3];
+            int r=1;
             for(int i=0; i< jsonmes.length;i++){
                 //printMes+="<td>";
                 JSONObject jsonObject = new JSONObject(jsonmes[i]);
+                table_inc[i][0]= String.valueOf(r);
+                r++;
+                table_inc[i][1]= jsonObject.getString("Number");
+                table_inc[i][2]= "Просрочен на: "+
+                        jsonObject.getString("DAY")+" дней, "+
+                        jsonObject.getString("HH")+ " часов, "+
+                        jsonObject.getString("MM")+ " минут";
                 printMes +="<tr><td>"+jsonObject.getString("Number")+"</td>";
                 printMes +="<td>Просрочен на: "+
                         jsonObject.getString("DAY")+" дней, "+

@@ -1,4 +1,5 @@
 bee/vimpelcom/basis_spring/entity/ExpiredInc.class
+bee/vimpelcom/basis_spring/entity/UserMail.class
 bee/vimpelcom/basis_spring/service/ExpiredIncService.class
 bee/vimpelcom/basis_spring/BasisSpringApplication.class
 bee/vimpelcom/basis_spring/controller/MainController.class

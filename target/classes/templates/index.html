@@ -3,11 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <h2 th:utext="${message}">..!..</h2>
+<form th:action="@{/d}" th:object="${userMail}" method="post">
+    <fieldset>
+        <div >
+            <div >
+                <div >
+                    <label for="emailLabel" >Введите email</label>
+                    <input  type="text" th:field="*{email}"  id="emailLabel" placeholder="Введите email"/>
+                </div>
+            </div>
+            <div>
+                <div ><br/>
+                    <button type="submit" >
+                        <span role="status" aria-hidden="true" ></span>&nbsp; Найти&nbsp;&nbsp;
+                    </button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<table border>
 
+    <tr >
+        <td data-href="https://google.com">1</td>
+        <td data-href="https://google.com">2</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>4</td>
+    </tr>
 
-
+</table>
+<script>
+    $(document).ready(function($) {
+        $('*[data-href]').on('click', function() {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
 </body>
+
 </html>

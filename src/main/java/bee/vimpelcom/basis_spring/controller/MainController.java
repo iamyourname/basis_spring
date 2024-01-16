@@ -36,7 +36,7 @@ public class MainController {
     public String sendUserReport(@ModelAttribute UserMail userMail, Model model){
         model.addAttribute("userMail", userMail);
         String email = userMail.getEmail();
-
+        // пше
         logger.info(email);
 
         return "index";

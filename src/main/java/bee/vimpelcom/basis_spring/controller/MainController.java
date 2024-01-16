@@ -50,9 +50,11 @@ public class MainController {
 
         model.addAttribute("dateTime", LocalDateTime.now().format(dateTimeFormatter));
         model.addAttribute("percent_errors", ZabbixAPI.getProcErrors()); // процент ошибочных
+        model.addAttribute("percent_success", ZabbixAPI.getProcSuccess()); // процент ошибочных
         model.addAttribute("success_count", ZabbixAPI.getSuccessActions()); // ecgtiyst
         model.addAttribute("zakupki_status", ZabbixAPI.getZakupkiStatus()); // ecgtiyst
         model.addAttribute("users_count", ZabbixAPI.getUsersCount()); // ecgtiyst
+        model.addAttribute("max_users_count", ZabbixAPI.getMaxUsersCount()); // ecgtiyst
 
         model.addAttribute("all_inc",ZabbixAPI.getAllInc());
         model.addAttribute("incoming_inc",ZabbixAPI.getIncomingIncToday());
@@ -79,7 +81,7 @@ public class MainController {
 
 
         logger.info("Get dashboard");
-        return "basis";
+        return "index";
     }
 
 

@@ -251,6 +251,23 @@ public class ZabbixAPI {
         return zabbixSenderAPI(apiUsersCount);
     }
 
+    public static String getProcSuccess() throws IOException {
+        String apiUsersCount = "{\n" +
+                "  \"method\": \"item.get\",\n" +
+                "  \"auth\": \""+token+"\",\n" +
+                "  \"id\": 1,\n" +
+                "  \"jsonrpc\": \"2.0\",\n" +
+                "  \"params\": {\n" +
+                "    \"filter\": {\n" +
+                "      \"itemid\": \"37020512\"\n" +
+                "    },\n" +
+                "    \"hostids\": \"104447\"\n" +
+                "  }\n" +
+                "}";
+        //
+        return zabbixSenderAPI(apiUsersCount);
+    }
+
     //28986977
 
 
@@ -366,7 +383,7 @@ public class ZabbixAPI {
                     .replace("},{","}!{")
                     .split("!");
 
-            table_inc = new String[jsonmes.length][3];
+            table_inc = new String[jsonmes.length][5];
             int r=1;
             for(int i=0; i< jsonmes.length;i++){
                 //printMes+="<td>";
@@ -374,7 +391,10 @@ public class ZabbixAPI {
                 table_inc[i][0]= String.valueOf(r);
                 r++;
                 table_inc[i][1]= jsonObject.getString("Number");
-                table_inc[i][2]= "Просрочен на: "+
+                table_inc[i][2]= jsonObject.getString("Status_new");
+                table_inc[i][3]= jsonObject.getString("Number_Depend");
+
+                table_inc[i][4]= "Просрочен на: "+
                         jsonObject.getString("DAY")+" дней, "+
                         jsonObject.getString("HH")+ " часов, "+
                         jsonObject.getString("MM")+ " минут";
@@ -393,6 +413,28 @@ public class ZabbixAPI {
         return printMes;
     }
 
+    public static String getMaxUsersCount() throws IOException {
+
+        String apiUsersCount = "{\n" +
+                "  \"method\": \"item.get\",\n" +
+                "  \"auth\": \""+token+"\",\n" +
+                "  \"id\": 1,\n" +
+                "  \"jsonrpc\": \"2.0\",\n" +
+                "  \"params\": {\n" +
+                "    \"filter\": {\n" +
+                "      \"itemid\": \"36647579\"\n" +
+                "    },\n" +
+                "    \"hostids\": \"132385\"\n" +
+                "  }\n" +
+                "}";
+
+        JSONObject gmux = new JSONObject(zabbixSenderAPI(apiUsersCount));
+
+
+        //
+        return gmux.getString("max");
+
+    }
 
     public static String getZabbixInfo() throws IOException, SQLException, ClassNotFoundException {
 
